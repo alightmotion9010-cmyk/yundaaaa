@@ -1,1 +1,429 @@
+```html
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Untukmu ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+scroll-behavior:smooth;
+}
+
+body{
+background:#0f0f16;
+color:white;
+overflow-x:hidden;
+}
+
+section{
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+padding:50px 20px;
+text-align:center;
+}
+
+.hero{
+background:linear-gradient(135deg,#ff4b6e,#ff7aa2);
+}
+
+.glass{
+background:rgba(255,255,255,.1);
+backdrop-filter:blur(10px);
+padding:30px;
+border-radius:25px;
+max-width:800px;
+box-shadow:0 10px 30px rgba(0,0,0,.3);
+}
+
+h1{
+font-size:3rem;
+margin-bottom:15px;
+}
+
+h2{
+margin-bottom:15px;
+font-size:2rem;
+}
+
+p{
+line-height:1.8;
+font-size:1.1rem;
+}
+
+.love-btn{
+width:140px;
+height:140px;
+border:none;
+cursor:pointer;
+background:#fff;
+color:#ff4b6e;
+font-size:60px;
+border-radius:50%;
+box-shadow:0 0 30px rgba(255,255,255,.5);
+animation:pulse 1.5s infinite;
+transition:.4s;
+}
+
+.love-btn:hover{
+transform:scale(1.15);
+}
+
+@keyframes pulse{
+0%{transform:scale(1);}
+50%{transform:scale(1.1);}
+100%{transform:scale(1);}
+}
+
+.hidden{
+display:none;
+}
+
+.photo{
+width:320px;
+height:420px;
+object-fit:cover;
+border-radius:25px;
+margin:25px 0;
+box-shadow:0 10px 40px rgba(0,0,0,.4);
+transition:.4s;
+}
+
+.photo:hover{
+transform:scale(1.05);
+}
+
+.bg1{
+background:linear-gradient(135deg,#1d2671,#c33764);
+}
+
+.bg2{
+background:linear-gradient(135deg,#42275a,#734b6d);
+}
+
+.letter{
+background:white;
+color:black;
+padding:30px;
+border-radius:20px;
+max-width:700px;
+cursor:pointer;
+transition:.5s;
+}
+
+.letter:hover{
+transform:translateY(-8px);
+}
+
+.letter-content{
+display:none;
+margin-top:20px;
+animation:fade .8s;
+}
+
+@keyframes fade{
+from{
+opacity:0;
+transform:translateY(20px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+.reveal{
+opacity:0;
+transform:translateY(60px);
+transition:1s;
+}
+
+.reveal.active{
+opacity:1;
+transform:translateY(0);
+}
+
+.close-btn{
+padding:18px 40px;
+border:none;
+border-radius:50px;
+cursor:pointer;
+font-size:18px;
+font-weight:600;
+background:#ff4b6e;
+color:white;
+transition:.4s;
+}
+
+.close-btn:hover{
+transform:scale(1.1);
+}
+
+.rose-container{
+display:none;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+min-height:100vh;
+background:black;
+position:relative;
+overflow:hidden;
+}
+
+.rose{
+font-size:140px;
+animation:bloom 2s ease forwards;
+}
+
+@keyframes bloom{
+from{
+transform:scale(0);
+opacity:0;
+}
+to{
+transform:scale(1);
+opacity:1;
+}
+}
+
+.float{
+position:absolute;
+font-size:26px;
+font-weight:bold;
+animation:float 7s linear infinite;
+color:white;
+}
+
+@keyframes float{
+0%{
+transform:translateY(100vh);
+opacity:0;
+}
+10%{
+opacity:1;
+}
+100%{
+transform:translateY(-120vh);
+opacity:0;
+}
+}
+
+.f1{left:10%;}
+.f2{left:35%;}
+.f3{left:60%;}
+.f4{left:85%;}
+
+.music-note{
+position:fixed;
+top:20px;
+right:20px;
+background:white;
+color:#ff4b6e;
+padding:12px 20px;
+border-radius:50px;
+font-weight:600;
+box-shadow:0 0 15px rgba(255,255,255,.4);
+z-index:999;
+}
+
+@media(max-width:768px){
+
+h1{
+font-size:2rem;
+}
+
+.photo{
+width:90%;
+height:auto;
+}
+}
+</style>
+</head>
+
+<body>
+
+<audio id="music" loop>
+<source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<section class="hero" id="home">
+<button class="love-btn" onclick="startWebsite()">❤️</button>
+<h2 style="margin-top:20px;">Klik Love Untuk Masuk</h2>
+</section>
+
+<div id="content" class="hidden">
+
+<div class="music-note">🎵 Music Playing</div>
+
+<section class="bg1 reveal">
+<div class="glass">
+<h1>Untuk Seseorang yang Sangat Istimewa ❤️</h1>
+<p>
+Ada banyak hal indah di dunia ini,
+tetapi bertemu denganmu adalah salah satu yang paling berharga.
+</p>
+</div>
+</section>
+
+<section class="reveal">
+<div class="glass">
+<h2>Pesan Untukmu</h2>
+<p>
+Terima kasih telah hadir dalam hidupku.
+Senyummu selalu mampu membuat hariku menjadi lebih baik.
+</p>
+</div>
+</section>
+
+<section class="bg2 reveal">
+<img src="foto1.jpg" class="photo">
+<h2>Momen Indah</h2>
+<p>
+Setiap kenangan bersamamu selalu menjadi cerita yang ingin kuingat.
+</p>
+</section>
+
+<section class="bg1 reveal">
+<div class="glass">
+<h2>Pesan Kecil ❤️</h2>
+<p>
+Jika waktu bisa berhenti,
+aku ingin menghentikannya saat bersamamu.
+</p>
+</div>
+</section>
+
+<section class="reveal">
+<img src="foto2.jpg" class="photo">
+<h2>Kenangan Kedua</h2>
+<p>
+Semoga semua langkah yang kita tempuh dipenuhi kebahagiaan.
+</p>
+</section>
+
+<section class="reveal">
+<div class="letter" onclick="openLetter()">
+
+<h2>📜 Klik Untuk Membuka Surat</h2>
+
+<div class="letter-content" id="letterContent">
+
+<h2>Surat Cinta ❤️</h2>
+
+<p>
+Untukmu,<br><br>
+
+Mungkin aku tidak selalu pandai mengungkapkan perasaan,
+tetapi setiap hari aku bersyukur karena mengenalmu.<br><br>
+
+Kehadiranmu membawa warna yang tidak pernah aku bayangkan sebelumnya.<br><br>
+
+Terima kasih telah menjadi bagian dari hidupku.<br><br>
+
+Dengan penuh kasih,<br>
+Namamu ❤️
+</p>
+
+</div>
+</div>
+</section>
+
+<section class="reveal">
+<h2>Terima Kasih Sudah Membaca ❤️</h2>
+<br>
+<button class="close-btn" onclick="showRose()">
+Tutup
+</button>
+</section>
+
+</div>
+
+<div class="rose-container" id="rosePage">
+
+<div class="rose">🌹</div>
+
+<div class="float f1">I Love You ❤️</div>
+<div class="float f2">Forever With You ❤️</div>
+<div class="float f3">My Happiness ❤️</div>
+<div class="float f4">My Everything ❤️</div>
+
+</div>
+
+<script>
+
+function startWebsite(){
+
+document.getElementById("content").classList.remove("hidden");
+
+document.getElementById("home").style.display="none";
+
+document.getElementById("music").play();
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+
+}
+
+function openLetter(){
+
+let letter=document.getElementById("letterContent");
+
+if(letter.style.display==="block"){
+letter.style.display="none";
+}else{
+letter.style.display="block";
+}
+
+}
+
+function showRose(){
+
+document.getElementById("content").style.display="none";
+
+document.getElementById("rosePage").style.display="flex";
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+
+}
+
+const reveals=document.querySelectorAll('.reveal');
+
+window.addEventListener('scroll',()=>{
+
+reveals.forEach(el=>{
+
+let top=el.getBoundingClientRect().top;
+
+let visible=window.innerHeight-100;
+
+if(top<visible){
+
+el.classList.add('active');
+
+}
+
+});
+
+});
+
+</script>
+
+</body>
+</html>
+```
 
