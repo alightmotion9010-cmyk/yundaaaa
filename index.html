@@ -2,123 +2,81 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Selamat Ulang Tahun 🎂</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Quicksand:wght@400;500;600;700&family=Nunito:wght@400;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Happy Birthday</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Great+Vibes&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,sans-serif}
+html{scroll-behavior:smooth}
+body{overflow-x:hidden;background:#fff}
+:root{--pink:#ffd6e7;--dark:#ff4f91}
+section{min-height:100vh;display:flex;align-items:center;justify-content:center;flex-direction:column;padding:30px}
+#landing{background:linear-gradient(#ffd6e7,#fff0f6);position:relative}
+h1{font-family:"Great Vibes",cursive;font-size:70px;color:#ff4f91}
+p{max-width:650px;text-align:center;margin:15px;color:#666}
+button{padding:15px 40px;border:none;border-radius:40px;background:#ff4f91;color:#fff;font-size:18px;cursor:pointer;transition:.3s}
+button:hover{transform:translateY(-4px) scale(1.05);box-shadow:0 15px 35px rgba(255,79,145,.35)}
+.cake{font-size:120px;animation:float 3s ease-in-out infinite}
+.balloon{position:fixed;bottom:-120px;font-size:40px;animation:fly linear infinite}
+.left{left:25px}.right{right:25px}
+.b1{animation-duration:10s}.b2{animation-duration:14s}.b3{animation-duration:12s}
+.flower{position:absolute;color:#fff;font-size:28px;animation:fall 8s linear infinite;opacity:.7}
+.card{background:#fff;padding:35px;border-radius:24px;box-shadow:0 15px 35px rgba(0,0,0,.12);width:min(90%,420px)}
+input{width:100%;padding:14px;border-radius:12px;border:2px solid #ffd6e7;margin:18px 0}
+.hidden{display:none}
+@keyframes fly{to{transform:translateY(-120vh)}}
+@keyframes float{50%{transform:translateY(-12px)}}
+@keyframes fall{from{transform:translateY(-40px)}to{transform:translateY(110vh) rotate(360deg)}}
+</style>
 </head>
 <body>
 
-<!-- MUSIK LATAR -->
-<audio id="bgm" loop preload="none">
-  <source src="music/song.mp3" type="audio/mpeg">
-</audio>
-<button id="musicToggle" class="music-toggle" aria-label="Putar musik" title="Putar musik">🔈</button>
+<div class="balloon left b1">🎈</div>
+<div class="balloon left b2" style="left:70px">🎈</div>
+<div class="balloon right b3">🎈</div>
+<div class="balloon right b2" style="right:70px">🎈</div>
 
-<!-- ============ SCREEN 1 : LANDING ============ -->
-<section id="landing" class="screen active">
-  <div class="floaty-icon top-left">🎈</div>
-  <div class="floaty-icon top-right">🎈</div>
-  <div class="logo-cake">🎂</div>
-  <p class="eyebrow">sebuah kado kecil untuk</p>
-  <h1 class="title-name">Untuk <span id="nameDisplay">Sayang</span> 💗</h1>
-  <p class="sub-landing">ada sesuatu yang menunggu di dalam...</p>
-  <button id="enterBtn" class="btn-primary">Masuk ✨</button>
+<section id="landing">
+<div class="flower" style="left:10%;animation-delay:0s">❀</div>
+<div class="flower" style="left:35%;animation-delay:2s">❀</div>
+<div class="flower" style="left:70%;animation-delay:4s">❀</div>
+<div class="cake">🎂</div>
+<h1>NAMA_ULTAH</h1>
+<p>TEKS_KECIL</p>
+<button onclick="showPassword()">Masuk</button>
 </section>
 
-<!-- ============ SCREEN 2 : PASSWORD ============ -->
-<section id="passwordScreen" class="screen">
-  <div class="lock-icon">🔒</div>
-  <h2 class="lock-title">Eh, tunggu dulu...</h2>
-  <p class="hint">Ini hanya untuk kamu. Coba masukkan tanggal lahirmu ya (format DD-MM-YYYY)</p>
-  <form id="passForm" autocomplete="off">
-    <input type="text" id="passInput" placeholder="contoh: 17-08-2000" inputmode="numeric" />
-    <button type="submit" class="btn-primary">Buka Kunci 🔑</button>
-  </form>
-  <p id="errorMsg" class="error-msg" aria-live="polite"></p>
-  <button id="backBtn" class="btn-ghost">← kembali</button>
+<section id="password" class="hidden">
+<div class="card">
+<h2>Masukkan Password</h2>
+<p>Masukkan tanggal ulang tahun.</p>
+<input id="pw" placeholder="PASSWORD">
+<p id="msg"></p>
+<button onclick="checkPw()">Buka</button>
+</div>
 </section>
 
-<!-- ============ SCREEN 3 : CELEBRATION ============ -->
-<main id="celebration" class="screen">
-
-  <canvas id="confettiCanvas"></canvas>
-
-  <div class="balloons balloons-left" aria-hidden="true">
-    <span class="balloon b1">🎈</span>
-    <span class="balloon b2">🎈</span>
-    <span class="balloon b3">🎈</span>
-  </div>
-  <div class="balloons balloons-right" aria-hidden="true">
-    <span class="balloon b4">🎈</span>
-    <span class="balloon b5">🎈</span>
-    <span class="balloon b6">🎈</span>
-  </div>
-
-  <section class="hero-celebration">
-    <div class="trumpet-row" aria-hidden="true">
-      <span class="trumpet t1">🎺</span>
-      <span class="trumpet t2">🎉</span>
-      <span class="trumpet t3">🎊</span>
-      <span class="trumpet t4">🎺</span>
-    </div>
-
-    <h1 class="big-wish">Happy Birthday,<br><span id="nameDisplay2">Sayang</span>!</h1>
-    <p class="wish-text">Semoga hari ini penuh senyum, dan setahun ke depan penuh hal-hal baik yang kamu layak dapatkan. Aku sayang kamu 💕</p>
-
-    <div class="photo-frame" id="photoFrame" role="button" tabindex="0" aria-label="Ketuk untuk membaca pesan">
-      <img id="photoImg" src="images/photo.jpg" alt="Foto kenangan" onerror="this.style.display='none'; this.parentElement.classList.add('no-photo')">
-      <div class="no-photo-placeholder">📷<br><small>letakkan foto di<br><code>images/photo.jpg</code></small></div>
-      <div class="photo-caption" id="photoCaption">
-        <p>Setiap momen sama kamu itu berharga. Makasih udah jadi alasan aku senyum tiap hari 🥹💗</p>
-        <span class="close-hint">ketuk lagi untuk menutup</span>
-      </div>
-    </div>
-    <p class="tap-hint">👆 ketuk foto untuk pesan spesial</p>
-
-    <div class="scroll-cue">
-      <span>scroll dikit lagi ada kejutan</span>
-      <div class="scroll-arrow">↓</div>
-    </div>
-  </section>
-
-  <section class="gift-section">
-    <h2 class="gift-title">Ada satu lagi untukmu...</h2>
-    <div class="gift-box" id="giftBox" role="button" tabindex="0" aria-label="Klik untuk membuka kado">
-      <div class="doll" id="doll">
-        <!-- cute bear illustration -->
-        <svg viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg" class="doll-svg">
-          <ellipse cx="60" cy="55" rx="26" ry="26" fill="#E8A9B0"/>
-          <ellipse cx="140" cy="55" rx="26" ry="26" fill="#E8A9B0"/>
-          <ellipse cx="60" cy="55" rx="13" ry="13" fill="#C9184A"/>
-          <ellipse cx="140" cy="55" rx="13" ry="13" fill="#C9184A"/>
-          <ellipse cx="100" cy="110" rx="70" ry="65" fill="#F4C6CC"/>
-          <ellipse cx="70" cy="105" rx="9" ry="12" fill="#3A2A2E"/>
-          <ellipse cx="130" cy="105" rx="9" ry="12" fill="#3A2A2E"/>
-          <ellipse cx="72" cy="101" rx="3" ry="4" fill="#fff"/>
-          <ellipse cx="132" cy="101" rx="3" ry="4" fill="#fff"/>
-          <ellipse cx="50" cy="125" rx="10" ry="7" fill="#F7A6B4" opacity="0.7"/>
-          <ellipse cx="150" cy="125" rx="10" ry="7" fill="#F7A6B4" opacity="0.7"/>
-          <ellipse cx="100" cy="120" rx="10" ry="7" fill="#E8899A"/>
-          <path d="M85 135 Q100 148 115 135" stroke="#3A2A2E" stroke-width="4" fill="none" stroke-linecap="round"/>
-          <ellipse cx="100" cy="185" rx="55" ry="35" fill="#F4C6CC"/>
-          <circle cx="100" cy="178" r="9" fill="#FF6F91"/>
-        </svg>
-      </div>
-      <div class="gift-lid" id="giftLid">🎁</div>
-      <div class="gift-body">💝</div>
-      <div class="sparkles" aria-hidden="true">
-        <span>✨</span><span>✨</span><span>✨</span><span>✨</span>
-      </div>
-    </div>
-    <p class="gift-hint" id="giftHint">klik kadonya ya 👀</p>
-    <p class="final-note" id="finalNote">Selamat ulang tahun, semoga selalu bahagia 🐻💗</p>
-  </section>
-
-</main>
-
-<script src="js/script.js"></script>
+<script>
+const PASSWORD="PASSWORD_ULTAH";
+const wrong=[
+"Yah, masih salah 😝",
+"Coba ingat lagi tanggal spesialnya ❤️",
+"Hampir benar...",
+"Belum tepat, coba lagi ya!",
+"Masih salah 😆"
+];
+function showPassword(){
+document.getElementById("landing").classList.add("hidden");
+document.getElementById("password").classList.remove("hidden");
+}
+function checkPw(){
+let v=document.getElementById("pw").value;
+if(v===PASSWORD){
+alert("Password benar! (Part 2 akan membuka halaman utama dengan animasi.)");
+}else{
+document.getElementById("msg").innerText=wrong[Math.floor(Math.random()*wrong.length)];
+}
+}
+</script>
 </body>
 </html>
