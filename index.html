@@ -2,81 +2,703 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Happy Birthday</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Great+Vibes&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Selamat Ulang Tahun 🎂</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,sans-serif}
-html{scroll-behavior:smooth}
-body{overflow-x:hidden;background:#fff}
-:root{--pink:#ffd6e7;--dark:#ff4f91}
-section{min-height:100vh;display:flex;align-items:center;justify-content:center;flex-direction:column;padding:30px}
-#landing{background:linear-gradient(#ffd6e7,#fff0f6);position:relative}
-h1{font-family:"Great Vibes",cursive;font-size:70px;color:#ff4f91}
-p{max-width:650px;text-align:center;margin:15px;color:#666}
-button{padding:15px 40px;border:none;border-radius:40px;background:#ff4f91;color:#fff;font-size:18px;cursor:pointer;transition:.3s}
-button:hover{transform:translateY(-4px) scale(1.05);box-shadow:0 15px 35px rgba(255,79,145,.35)}
-.cake{font-size:120px;animation:float 3s ease-in-out infinite}
-.balloon{position:fixed;bottom:-120px;font-size:40px;animation:fly linear infinite}
-.left{left:25px}.right{right:25px}
-.b1{animation-duration:10s}.b2{animation-duration:14s}.b3{animation-duration:12s}
-.flower{position:absolute;color:#fff;font-size:28px;animation:fall 8s linear infinite;opacity:.7}
-.card{background:#fff;padding:35px;border-radius:24px;box-shadow:0 15px 35px rgba(0,0,0,.12);width:min(90%,420px)}
-input{width:100%;padding:14px;border-radius:12px;border:2px solid #ffd6e7;margin:18px 0}
-.hidden{display:none}
-@keyframes fly{to{transform:translateY(-120vh)}}
-@keyframes float{50%{transform:translateY(-12px)}}
-@keyframes fall{from{transform:translateY(-40px)}to{transform:translateY(110vh) rotate(360deg)}}
+  :root{
+    --pink-bg:#ffd9e6;
+    --pink-deep:#ff8fab;
+    --pink-hot:#ff5c8a;
+    --pink-pale:#fff2f7;
+    --white:#ffffff;
+    --gold:#ffd966;
+    --text-dark:#6b3f52;
+    --shadow-pink:rgba(255,92,138,0.28);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Quicksand',sans-serif;
+    color:var(--text-dark);
+    overflow-x:hidden;
+    background:var(--white);
+  }
+  h1,h2,.script{font-family:'Pacifico',cursive;font-weight:400;}
+  ::selection{background:var(--pink-hot);color:#fff;}
+
+  /* ===================== BALLOONS (fixed both sides, whole site) ===================== */
+  .balloon-layer{
+    position:fixed;
+    top:0;left:0;
+    width:100%;height:100%;
+    pointer-events:none;
+    z-index:5;
+    overflow:hidden;
+  }
+  .balloon{
+    position:absolute;
+    bottom:-160px;
+    width:56px;height:70px;
+    border-radius:50% 50% 50% 50% / 60% 60% 40% 40%;
+    animation:floatUp linear infinite;
+    opacity:0.85;
+    filter:drop-shadow(0 6px 10px var(--shadow-pink));
+  }
+  .balloon::after{
+    content:"";
+    position:absolute;
+    bottom:-40px;left:50%;
+    width:1px;height:40px;
+    background:rgba(107,63,82,0.35);
+    transform:translateX(-50%);
+  }
+  .balloon::before{
+    content:"";
+    position:absolute;
+    top:-10px;left:50%;
+    width:0;height:0;
+    border-left:6px solid transparent;
+    border-right:6px solid transparent;
+    border-top:10px solid currentColor;
+    transform:translateX(-50%) rotate(180deg);
+  }
+  @keyframes floatUp{
+    0%{transform:translateY(0) translateX(0) rotate(-4deg);}
+    25%{transform:translateY(-28vh) translateX(18px) rotate(4deg);}
+    50%{transform:translateY(-55vh) translateX(-14px) rotate(-3deg);}
+    75%{transform:translateY(-82vh) translateX(10px) rotate(3deg);}
+    100%{transform:translateY(-110vh) translateX(0) rotate(-4deg);}
+  }
+
+  /* ===================== LOCK SCREEN ===================== */
+  #lockScreen{
+    position:fixed;
+    inset:0;
+    z-index:10;
+    background:
+      radial-gradient(circle at 15% 20%, rgba(255,255,255,0.55), transparent 40%),
+      radial-gradient(circle at 85% 80%, rgba(255,255,255,0.45), transparent 45%),
+      linear-gradient(160deg, var(--pink-bg), var(--pink-deep));
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition:opacity 1s ease, transform 1s ease;
+    overflow:hidden;
+  }
+  #lockScreen.hidden{
+    opacity:0;
+    transform:scale(1.05);
+    pointer-events:none;
+  }
+  .flower{
+    position:absolute;
+    opacity:0.9;
+  }
+  .lock-card{
+    position:relative;
+    z-index:2;
+    text-align:center;
+    padding:40px 32px;
+    max-width:420px;
+  }
+  .cake-wrap{
+    animation:bob 3.5s ease-in-out infinite;
+  }
+  @keyframes bob{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(-10px);}
+  }
+  .to-name{
+    font-size:2.1rem;
+    color:#fff;
+    text-shadow:0 3px 10px rgba(107,63,82,0.35);
+    margin-top:10px;
+  }
+  .small-text{
+    font-size:0.95rem;
+    color:#fff;
+    opacity:0.95;
+    margin-top:8px;
+    letter-spacing:0.3px;
+  }
+  #enterBtn{
+    margin-top:28px;
+    padding:14px 42px;
+    font-family:'Quicksand',sans-serif;
+    font-weight:700;
+    font-size:1.05rem;
+    color:var(--pink-hot);
+    background:#fff;
+    border:none;
+    border-radius:50px;
+    cursor:pointer;
+    box-shadow:0 8px 20px rgba(107,63,82,0.3);
+    transition:all 0.35s ease;
+    position:relative;
+    overflow:hidden;
+  }
+  #enterBtn::before{
+    content:"";
+    position:absolute;
+    top:0;left:-75%;
+    width:50%;height:100%;
+    background:linear-gradient(120deg, transparent, rgba(255,143,171,0.5), transparent);
+    transform:skewX(-20deg);
+    transition:left 0.6s ease;
+  }
+  #enterBtn:hover{
+    transform:translateY(-4px) scale(1.05);
+    box-shadow:0 14px 28px rgba(107,63,82,0.4);
+    color:#fff;
+    background:var(--pink-hot);
+  }
+  #enterBtn:hover::before{left:120%;}
+  #enterBtn:active{transform:translateY(-1px) scale(0.98);}
+
+  /* ===================== PASSWORD MODAL ===================== */
+  #passModal{
+    position:fixed;inset:0;
+    z-index:20;
+    background:rgba(107,63,82,0.45);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    backdrop-filter:blur(3px);
+  }
+  #passModal.show{display:flex;}
+  .modal-box{
+    background:#fff;
+    border-radius:24px;
+    padding:38px 32px;
+    max-width:360px;
+    width:88%;
+    text-align:center;
+    box-shadow:0 20px 50px rgba(107,63,82,0.35);
+    position:relative;
+    animation:popIn 0.4s ease;
+  }
+  @keyframes popIn{
+    from{transform:scale(0.8);opacity:0;}
+    to{transform:scale(1);opacity:1;}
+  }
+  .modal-box h3{font-family:'Pacifico',cursive;font-size:1.5rem;color:var(--pink-hot);margin-bottom:6px;}
+  .modal-box p.hint{font-size:0.85rem;color:#a3798c;margin-bottom:18px;}
+  #passInput{
+    width:100%;
+    padding:12px 16px;
+    border:2px solid var(--pink-bg);
+    border-radius:14px;
+    font-size:1rem;
+    font-family:'Quicksand',sans-serif;
+    text-align:center;
+    outline:none;
+    transition:border-color 0.3s;
+  }
+  #passInput:focus{border-color:var(--pink-hot);}
+  #submitPass{
+    margin-top:16px;
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:14px;
+    background:var(--pink-hot);
+    color:#fff;
+    font-weight:700;
+    font-size:1rem;
+    cursor:pointer;
+    transition:background 0.3s, transform 0.2s;
+  }
+  #submitPass:hover{background:#e14979;transform:translateY(-2px);}
+  #closeModal{
+    position:absolute;
+    top:12px;right:16px;
+    border:none;background:none;
+    font-size:1.2rem;color:#c88;
+    cursor:pointer;
+  }
+  #passMsg{
+    margin-top:14px;
+    min-height:20px;
+    font-size:0.9rem;
+    font-weight:600;
+  }
+  #passMsg.wrong{color:#ff5c8a;}
+  #passMsg.right{color:#4caf82;}
+
+  /* ===================== SUCCESS OVERLAY ===================== */
+  #successOverlay{
+    position:fixed;inset:0;
+    z-index:30;
+    background:linear-gradient(160deg, var(--pink-deep), var(--pink-hot));
+    display:none;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    color:#fff;
+    flex-direction:column;
+  }
+  #successOverlay.show{display:flex;}
+  #successOverlay h2{font-size:2.4rem;margin-bottom:10px;}
+  #successOverlay p{font-size:1rem;opacity:0.95;}
+  .confetti-piece{
+    position:absolute;
+    top:-20px;
+    border-radius:2px;
+    animation:confettiFall linear forwards;
+  }
+  @keyframes confettiFall{
+    to{transform:translateY(110vh) rotate(360deg);opacity:0.9;}
+  }
+
+  /* ===================== MAIN SITE ===================== */
+  #mainSite{display:none;position:relative;z-index:1;}
+  #mainSite.show{display:block;}
+  section{
+    position:relative;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:80px 24px;
+  }
+
+  /* HERO */
+  #hero{
+    background:
+      radial-gradient(circle at 10% 15%, rgba(255,143,171,0.18), transparent 40%),
+      radial-gradient(circle at 90% 85%, rgba(255,143,171,0.15), transparent 45%),
+      var(--white);
+  }
+  #hero h1{font-size:2.8rem;color:var(--pink-hot);margin-bottom:14px;}
+  #hero p{font-size:1.05rem;max-width:480px;color:#8a5a6d;}
+  .scroll-hint{
+    margin-top:50px;
+    font-size:0.85rem;
+    color:var(--pink-deep);
+    animation:pulseHint 1.8s ease-in-out infinite;
+  }
+  @keyframes pulseHint{
+    0%,100%{opacity:0.5;transform:translateY(0);}
+    50%{opacity:1;transform:translateY(6px);}
+  }
+
+  /* PHOTO SECTION */
+  #photoSection{background:var(--pink-pale);}
+  #photoSection h2{font-size:2rem;color:var(--pink-hot);margin-bottom:24px;}
+  .photo-frame{
+    width:300px;
+    max-width:80vw;
+    aspect-ratio:4/5;
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:0 20px 40px rgba(255,92,138,0.25);
+    border:8px solid #fff;
+    position:relative;
+    background:linear-gradient(135deg,#ffd9e6,#ffb6c9);
+  }
+  .photo-frame img{width:100%;height:100%;object-fit:cover;display:block;}
+  #photoPlaceholder{
+    position:absolute;inset:0;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    color:#fff;
+    font-size:0.85rem;
+    padding:16px;
+    text-align:center;
+  }
+  .photo-caption{
+    margin-top:18px;
+    font-size:0.95rem;
+    color:#8a5a6d;
+    max-width:340px;
+  }
+  .reveal{opacity:0;transform:translateY(40px);transition:all 0.9s ease;}
+  .reveal.in-view{opacity:1;transform:translateY(0);}
+
+  /* GIFT SECTION */
+  #giftSection{background:var(--white);}
+  #giftSection h2{font-size:2rem;color:var(--pink-hot);margin-bottom:8px;}
+  #giftSection > p.sub{color:#8a5a6d;margin-bottom:30px;font-size:0.95rem;}
+  .gift-stage{
+    position:relative;
+    width:220px;height:260px;
+    display:flex;align-items:flex-end;justify-content:center;
+  }
+  #openGiftBtn{
+    margin-top:26px;
+    padding:14px 36px;
+    border:none;
+    border-radius:50px;
+    background:var(--pink-hot);
+    color:#fff;
+    font-weight:700;
+    font-size:1rem;
+    cursor:pointer;
+    box-shadow:0 10px 22px rgba(255,92,138,0.35);
+    transition:transform 0.3s, box-shadow 0.3s;
+  }
+  #openGiftBtn:hover{
+    transform:translateY(-4px) rotate(-2deg) scale(1.05);
+    box-shadow:0 16px 30px rgba(255,92,138,0.45);
+  }
+  .doll-msg{
+    margin-top:22px;
+    background:#fff;
+    border:2px solid var(--pink-bg);
+    border-radius:18px;
+    padding:14px 20px;
+    font-size:1.05rem;
+    color:var(--pink-hot);
+    font-weight:700;
+    max-width:320px;
+    opacity:0;
+    transform:translateY(14px) scale(0.9);
+    transition:all 0.6s ease;
+  }
+  .doll-msg.show{opacity:1;transform:translateY(0) scale(1);}
+
+  /* CLOSING */
+  #closing{
+    background:linear-gradient(180deg, var(--pink-pale), var(--pink-bg));
+  }
+  #closing h2{font-size:1.9rem;color:var(--pink-hot);margin-bottom:12px;}
+  #closing p{max-width:420px;color:#8a5a6d;font-size:1rem;line-height:1.7;}
+  .signature{
+    margin-top:30px;
+    font-family:'Pacifico',cursive;
+    font-size:1.3rem;
+    color:var(--pink-deep);
+  }
+
+  @media(max-width:480px){
+    #hero h1{font-size:2.1rem;}
+    .photo-frame{width:250px;}
+  }
 </style>
 </head>
 <body>
 
-<div class="balloon left b1">🎈</div>
-<div class="balloon left b2" style="left:70px">🎈</div>
-<div class="balloon right b3">🎈</div>
-<div class="balloon right b2" style="right:70px">🎈</div>
+<!-- ============ BALLOONS (visible on both lock screen & main site) ============ -->
+<div class="balloon-layer" id="balloonLayer"></div>
 
-<section id="landing">
-<div class="flower" style="left:10%;animation-delay:0s">❀</div>
-<div class="flower" style="left:35%;animation-delay:2s">❀</div>
-<div class="flower" style="left:70%;animation-delay:4s">❀</div>
-<div class="cake">🎂</div>
-<h1>NAMA_ULTAH</h1>
-<p>TEKS_KECIL</p>
-<button onclick="showPassword()">Masuk</button>
-</section>
+<!-- ============ LOCK SCREEN ============ -->
+<div id="lockScreen">
+  <!-- decorative white flowers -->
+  <svg class="flower" style="top:6%;left:8%;width:70px;" viewBox="0 0 100 100"><g fill="#fff"><circle cx="50" cy="30" r="16"/><circle cx="30" cy="50" r="16"/><circle cx="70" cy="50" r="16"/><circle cx="50" cy="70" r="16"/><circle cx="50" cy="50" r="12" fill="#ffd966"/></g></svg>
+  <svg class="flower" style="bottom:10%;right:10%;width:90px;" viewBox="0 0 100 100"><g fill="#fff"><circle cx="50" cy="30" r="16"/><circle cx="30" cy="50" r="16"/><circle cx="70" cy="50" r="16"/><circle cx="50" cy="70" r="16"/><circle cx="50" cy="50" r="12" fill="#ffd966"/></g></svg>
+  <svg class="flower" style="top:12%;right:12%;width:50px;opacity:0.7" viewBox="0 0 100 100"><g fill="#fff"><circle cx="50" cy="30" r="16"/><circle cx="30" cy="50" r="16"/><circle cx="70" cy="50" r="16"/><circle cx="50" cy="70" r="16"/><circle cx="50" cy="50" r="12" fill="#ffd966"/></g></svg>
+  <svg class="flower" style="bottom:16%;left:14%;width:45px;opacity:0.7" viewBox="0 0 100 100"><g fill="#fff"><circle cx="50" cy="30" r="16"/><circle cx="30" cy="50" r="16"/><circle cx="70" cy="50" r="16"/><circle cx="50" cy="70" r="16"/><circle cx="50" cy="50" r="12" fill="#ffd966"/></g></svg>
 
-<section id="password" class="hidden">
-<div class="card">
-<h2>Masukkan Password</h2>
-<p>Masukkan tanggal ulang tahun.</p>
-<input id="pw" placeholder="PASSWORD">
-<p id="msg"></p>
-<button onclick="checkPw()">Buka</button>
+  <div class="lock-card">
+    <div class="cake-wrap">
+      <!-- Cute hand-made birthday cake illustration -->
+      <svg width="180" height="170" viewBox="0 0 180 170">
+        <!-- plate -->
+        <ellipse cx="90" cy="158" rx="80" ry="10" fill="#ffffff" opacity="0.9"/>
+        <!-- bottom tier -->
+        <rect x="25" y="105" width="130" height="45" rx="10" fill="#ffb6c9"/>
+        <rect x="25" y="105" width="130" height="14" rx="7" fill="#ff8fab"/>
+        <!-- top tier -->
+        <rect x="50" y="65" width="80" height="45" rx="10" fill="#fff0f5"/>
+        <rect x="50" y="65" width="80" height="14" rx="7" fill="#ffd9e6"/>
+        <!-- drips -->
+        <circle cx="55" cy="112" r="6" fill="#ff8fab"/>
+        <circle cx="80" cy="115" r="6" fill="#ff8fab"/>
+        <circle cx="105" cy="112" r="6" fill="#ff8fab"/>
+        <circle cx="130" cy="115" r="6" fill="#ff8fab"/>
+        <!-- candle -->
+        <rect x="84" y="35" width="10" height="32" rx="4" fill="#ffd966"/>
+        <path id="flame" d="M89 35 C84 27 89 20 89 15 C94 22 96 28 89 35 Z" fill="#ffb347">
+          <animate attributeName="d" dur="1s" repeatCount="indefinite"
+            values="M89 35 C84 27 89 20 89 15 C94 22 96 28 89 35 Z;
+                    M89 35 C85 26 91 19 89 12 C93 21 95 27 89 35 Z;
+                    M89 35 C84 27 89 20 89 15 C94 22 96 28 89 35 Z"/>
+        </path>
+        <!-- sprinkles -->
+        <circle cx="65" cy="85" r="3" fill="#ff8fab"/>
+        <circle cx="95" cy="90" r="3" fill="#ffd966"/>
+        <circle cx="115" cy="82" r="3" fill="#ff8fab"/>
+        <circle cx="45" cy="125" r="3" fill="#ffd966"/>
+        <circle cx="140" cy="130" r="3" fill="#ffffff"/>
+      </svg>
+    </div>
+    <div class="to-name script" id="toNameText">Untuk Nama Kamu</div>
+    <div class="small-text" id="smallText">sebuah kejutan kecil dariku, buat kamu ✨</div>
+    <button id="enterBtn">Masuk 💌</button>
+  </div>
 </div>
-</section>
+
+<!-- ============ PASSWORD MODAL ============ -->
+<div id="passModal">
+  <div class="modal-box">
+    <button id="closeModal">✕</button>
+    <h3>Masukkan Kata Kunci</h3>
+    <p class="hint">Petunjuk: tanggal ulang tahunnya 🎂</p>
+    <input type="text" id="passInput" placeholder="contoh: 01-01-2000" autocomplete="off">
+    <button id="submitPass">Buka</button>
+    <div id="passMsg"></div>
+  </div>
+</div>
+
+<!-- ============ SUCCESS OVERLAY ============ -->
+<div id="successOverlay">
+  <h2 id="successTitle">Yeay, Berhasil! 🎉</h2>
+  <p id="successSub">terima kasih sudah membuka kejutan ini 💕</p>
+</div>
+
+<!-- ============ MAIN SITE ============ -->
+<div id="mainSite">
+
+  <section id="hero">
+    <h1 id="heroTitle">Selamat Ulang Tahun!</h1>
+    <p id="heroSub">Semoga hari ini penuh tawa, cinta, dan kejutan-kejutan manis yang bikin senyum nggak berhenti 🎈</p>
+    <div class="scroll-hint">↓ geser ke bawah ↓</div>
+  </section>
+
+  <section id="photoSection">
+    <h2 class="reveal">Momen Spesial</h2>
+    <div class="photo-frame reveal">
+      <img src="assets/foto.jpg" id="mainPhoto" alt="Foto kenangan"
+        onerror="this.style.display='none'; document.getElementById('photoPlaceholder').style.display='flex';">
+      <div id="photoPlaceholder" style="display:none;">
+        <span style="font-size:2rem;">🖼️</span>
+        <span>Taruh foto kamu di<br><b>assets/foto.jpg</b></span>
+      </div>
+    </div>
+    <p class="photo-caption reveal" id="photoCaption">Salah satu momen paling berkesan yang pernah ada 💗</p>
+  </section>
+
+  <section id="giftSection">
+    <h2 class="reveal">Ada Kado Untukmu 🎁</h2>
+    <p class="sub reveal">klik kadonya, jangan diintip dulu ya!</p>
+    <div class="gift-stage reveal">
+      <svg id="giftBoxSvg" width="180" height="180" viewBox="0 0 180 180" style="cursor:pointer;">
+        <!-- doll peeking (hidden until opened) -->
+        <g id="dollGroup" opacity="0" transform="translate(0,40)">
+          <!-- ears -->
+          <circle cx="70" cy="55" r="14" fill="#f2c9a0"/>
+          <circle cx="110" cy="55" r="14" fill="#f2c9a0"/>
+          <circle cx="70" cy="55" r="7" fill="#ffb6c9"/>
+          <circle cx="110" cy="55" r="7" fill="#ffb6c9"/>
+          <!-- head -->
+          <circle cx="90" cy="75" r="38" fill="#f6d5ae"/>
+          <!-- cheeks -->
+          <circle cx="72" cy="82" r="6" fill="#ffb6c9" opacity="0.8"/>
+          <circle cx="108" cy="82" r="6" fill="#ffb6c9" opacity="0.8"/>
+          <!-- eyes -->
+          <circle cx="78" cy="72" r="4" fill="#6b3f52"/>
+          <circle cx="102" cy="72" r="4" fill="#6b3f52"/>
+          <!-- nose/mouth -->
+          <path d="M85 84 Q90 90 95 84" stroke="#6b3f52" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <!-- bow -->
+          <path d="M90 45 L78 36 L90 40 L102 36 Z" fill="#ff5c8a"/>
+          <circle cx="90" cy="42" r="4" fill="#e14979"/>
+        </g>
+        <!-- box bottom -->
+        <rect x="35" y="95" width="110" height="70" rx="8" fill="#ff8fab"/>
+        <rect x="35" y="95" width="110" height="70" rx="8" fill="url(#stripes)"/>
+        <!-- lid group (animated open) -->
+        <g id="lidGroup" style="transform-origin:40px 95px; transition: transform 0.8s cubic-bezier(.34,1.56,.64,1);">
+          <rect x="28" y="78" width="124" height="26" rx="8" fill="#ff5c8a"/>
+          <rect x="80" y="60" width="20" height="45" fill="#ffd966"/>
+          <path d="M90 60 C70 40 55 45 60 60 C68 55 80 55 90 60 Z" fill="#ffd966"/>
+          <path d="M90 60 C110 40 125 45 120 60 C112 55 100 55 90 60 Z" fill="#ffd966"/>
+        </g>
+        <defs>
+          <pattern id="stripes" width="20" height="70" patternUnits="userSpaceOnUse">
+            <rect x="8" width="6" height="70" fill="#ffffff" opacity="0.5"/>
+          </pattern>
+        </defs>
+      </svg>
+    </div>
+    <button id="openGiftBtn">Buka Kadonya</button>
+    <div class="doll-msg" id="dollMsg">Selamat Ulang Tahun, Nama Kamu! 🎉🎂 Semoga selalu bahagia!</div>
+  </section>
+
+  <section id="closing">
+    <h2>Sekian Kejutan Kecil Ini</h2>
+    <p>Semoga tahun barumu dipenuhi hal-hal baik, kesehatan, dan kebahagiaan yang nggak ada habisnya. Terima kasih sudah jadi orang yang spesial 🌸</p>
+    <div class="signature">dengan sayang, aku</div>
+  </section>
+
+</div>
 
 <script>
-const PASSWORD="PASSWORD_ULTAH";
-const wrong=[
-"Yah, masih salah 😝",
-"Coba ingat lagi tanggal spesialnya ❤️",
-"Hampir benar...",
-"Belum tepat, coba lagi ya!",
-"Masih salah 😆"
-];
-function showPassword(){
-document.getElementById("landing").classList.add("hidden");
-document.getElementById("password").classList.remove("hidden");
+/* =====================================================================
+   KONFIGURASI — GANTI BAGIAN INI SESUAI KEBUTUHAN KAMU
+   ===================================================================== */
+const CONFIG = {
+  name: "Nama Kamu",              // nama yang ulang tahun
+  password: "01-01-2000",         // password = tanggal lahir (format bebas, harus sama persis dg placeholder di input)
+  photoCaption: "Salah satu momen paling berkesan yang pernah ada 💗",
+  wrongMessages: [
+    "Yah, salah! Coba lagi ya 😅",
+    "Hmm, bukan itu tanggalnya...",
+    "Ups! Ingat-ingat lagi ya 🎂",
+    "Bukan tuh, coba yang lain!",
+    "Dicoba lagi dong, pasti inget kok!",
+    "Wah meleset, semangat lagi ya!",
+    "Belum tepat nih, coba sekali lagi 🌸",
+    "Hampir! tapi belum pas hehe"
+  ]
+};
+
+/* Terapkan konfigurasi ke teks-teks di halaman */
+document.getElementById('toNameText').textContent = "Untuk " + CONFIG.name;
+document.getElementById('heroTitle').textContent = "Selamat Ulang Tahun, " + CONFIG.name + "!";
+document.getElementById('photoCaption').textContent = CONFIG.photoCaption;
+document.getElementById('dollMsg').textContent = "Selamat Ulang Tahun, " + CONFIG.name + "! 🎉🎂 Semoga selalu bahagia!";
+
+/* =====================================================================
+   BALLOONS — kiri & kanan, warna pink bertingkat
+   ===================================================================== */
+const balloonColors = ['#ff8fab','#ff5c8a','#ffb6c9','#ffd1e3'];
+const balloonLayer = document.getElementById('balloonLayer');
+function spawnBalloons(count){
+  for(let i=0;i<count;i++){
+    const b = document.createElement('div');
+    b.className='balloon';
+    const isLeft = i % 2 === 0;
+    b.style.left = isLeft ? (Math.random()*10 + 2) + '%' : (Math.random()*10 + 86) + '%';
+    const col = balloonColors[i % balloonColors.length];
+    b.style.background = col;
+    b.style.color = col;
+    const dur = 14 + Math.random()*10;
+    b.style.animationDuration = dur + 's';
+    b.style.animationDelay = (Math.random()*dur) + 's';
+    const scale = 0.7 + Math.random()*0.6;
+    b.style.transform = `scale(${scale})`;
+    balloonLayer.appendChild(b);
+  }
 }
-function checkPw(){
-let v=document.getElementById("pw").value;
-if(v===PASSWORD){
-alert("Password benar! (Part 2 akan membuka halaman utama dengan animasi.)");
-}else{
-document.getElementById("msg").innerText=wrong[Math.floor(Math.random()*wrong.length)];
+spawnBalloons(10);
+
+/* =====================================================================
+   LOCK SCREEN -> PASSWORD MODAL
+   ===================================================================== */
+const enterBtn = document.getElementById('enterBtn');
+const passModal = document.getElementById('passModal');
+const closeModal = document.getElementById('closeModal');
+const passInput = document.getElementById('passInput');
+const submitPass = document.getElementById('submitPass');
+const passMsg = document.getElementById('passMsg');
+const lockScreen = document.getElementById('lockScreen');
+const successOverlay = document.getElementById('successOverlay');
+const mainSite = document.getElementById('mainSite');
+
+enterBtn.addEventListener('click', ()=>{
+  passModal.classList.add('show');
+  passInput.focus();
+});
+closeModal.addEventListener('click', ()=>{
+  passModal.classList.remove('show');
+  passMsg.textContent='';
+});
+
+function checkPassword(){
+  const val = passInput.value.trim();
+  if(val === '') return;
+  if(val === CONFIG.password){
+    passMsg.className='right';
+    passMsg.textContent='Yeay, benar! 🎉';
+    setTimeout(unlockSite, 700);
+  } else {
+    passMsg.className='wrong';
+    const msg = CONFIG.wrongMessages[Math.floor(Math.random()*CONFIG.wrongMessages.length)];
+    passMsg.textContent = msg;
+    passInput.style.animation='none';
+    requestAnimationFrame(()=>{ passInput.style.animation='shake 0.4s'; });
+  }
 }
+submitPass.addEventListener('click', checkPassword);
+passInput.addEventListener('keydown', (e)=>{ if(e.key==='Enter') checkPassword(); });
+
+/* shake animation for wrong password */
+const styleTag = document.createElement('style');
+styleTag.textContent = `@keyframes shake{
+  10%,90%{transform:translateX(-2px);}
+  20%,80%{transform:translateX(4px);}
+  30%,50%,70%{transform:translateX(-8px);}
+  40%,60%{transform:translateX(8px);}
+}`;
+document.head.appendChild(styleTag);
+
+function unlockSite(){
+  passModal.classList.remove('show');
+  successOverlay.classList.add('show');
+  launchConfetti();
+  setTimeout(()=>{
+    successOverlay.classList.remove('show');
+    lockScreen.classList.add('hidden');
+    mainSite.classList.add('show');
+    setTimeout(()=>{ lockScreen.style.display='none'; }, 1000);
+    initRevealObserver();
+  }, 2400);
 }
+
+/* =====================================================================
+   CONFETTI on success
+   ===================================================================== */
+function launchConfetti(){
+  const colors = ['#ffffff','#ffd966','#ff8fab','#ffb6c9'];
+  for(let i=0;i<60;i++){
+    const c = document.createElement('div');
+    c.className='confetti-piece';
+    c.style.left = Math.random()*100 + '%';
+    c.style.width = (6+Math.random()*6)+'px';
+    c.style.height = (10+Math.random()*10)+'px';
+    c.style.background = colors[Math.floor(Math.random()*colors.length)];
+    c.style.animationDuration = (2+Math.random()*2)+'s';
+    c.style.animationDelay = (Math.random()*0.6)+'s';
+    successOverlay.appendChild(c);
+    setTimeout(()=>c.remove(), 4500);
+  }
+}
+
+/* =====================================================================
+   SCROLL REVEAL for photo / gift / closing sections
+   ===================================================================== */
+function initRevealObserver(){
+  const items = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){ entry.target.classList.add('in-view'); }
+    });
+  }, {threshold:0.2});
+  items.forEach(it=>obs.observe(it));
+}
+
+/* =====================================================================
+   GIFT BOX OPEN
+   ===================================================================== */
+const openGiftBtn = document.getElementById('openGiftBtn');
+const lidGroup = document.getElementById('lidGroup');
+const dollGroup = document.getElementById('dollGroup');
+const dollMsg = document.getElementById('dollMsg');
+const giftBoxSvg = document.getElementById('giftBoxSvg');
+let giftOpened = false;
+
+function openGift(){
+  if(giftOpened) return;
+  giftOpened = true;
+  lidGroup.style.transform = 'translate(-18px,-38px) rotate(-25deg)';
+  dollGroup.style.transition = 'opacity 0.6s ease, transform 0.6s cubic-bezier(.34,1.56,.64,1)';
+  dollGroup.style.opacity = '1';
+  dollGroup.style.transform = 'translate(0,0)';
+  setTimeout(()=>{ dollMsg.classList.add('show'); }, 500);
+  openGiftBtn.textContent = 'Kado Terbuka 🎉';
+  openGiftBtn.style.opacity = '0.7';
+  openGiftBtn.style.cursor = 'default';
+}
+openGiftBtn.addEventListener('click', openGift);
+giftBoxSvg.addEventListener('click', openGift);
 </script>
 </body>
 </html>
