@@ -231,17 +231,18 @@
   #successOverlay{
     position:fixed;inset:0;
     z-index:30;
-    background:linear-gradient(160deg, var(--pink-deep), var(--pink-hot));
+    background:radial-gradient(circle at 50% 30%, #6b3f6b, #3a1f3e 75%);
     display:none;
     align-items:center;
     justify-content:center;
     text-align:center;
     color:#fff;
     flex-direction:column;
+    overflow:hidden;
   }
   #successOverlay.show{display:flex;}
-  #successOverlay h2{font-size:2.4rem;margin-bottom:10px;}
-  #successOverlay p{font-size:1rem;opacity:0.95;}
+  #successOverlay h2{font-size:2.4rem;margin-bottom:10px;position:relative;z-index:2;}
+  #successOverlay p{font-size:1rem;opacity:0.95;position:relative;z-index:2;}
   .confetti-piece{
     position:absolute;
     top:-20px;
@@ -251,6 +252,48 @@
   @keyframes confettiFall{
     to{transform:translateY(110vh) rotate(360deg);opacity:0.9;}
   }
+
+  /* kembang api */
+  .firework{
+    position:absolute;
+    width:0;height:0;
+  }
+  .fw-particle{
+    position:absolute;
+    top:0;left:0;
+    width:6px;height:6px;
+    border-radius:50%;
+    animation:fwBurst 1.1s ease-out forwards;
+  }
+  @keyframes fwBurst{
+    0%{
+      transform:translate(0,0) scale(1);
+      opacity:1;
+    }
+    100%{
+      transform:translate(var(--tx), var(--ty)) scale(0.2);
+      opacity:0;
+    }
+  }
+  #closeSuccessBtn{
+    margin-top:26px;
+    padding:12px 34px;
+    border:none;
+    border-radius:50px;
+    background:#fff;
+    color:var(--pink-hot);
+    font-weight:700;
+    font-size:0.95rem;
+    cursor:pointer;
+    position:relative;
+    z-index:2;
+    opacity:0;
+    transform:translateY(10px);
+    transition:opacity 0.5s ease, transform 0.5s ease, background 0.3s;
+    box-shadow:0 10px 22px rgba(0,0,0,0.25);
+  }
+  #closeSuccessBtn.show-btn{opacity:1;transform:translateY(0);}
+  #closeSuccessBtn:hover{background:var(--pink-hot);color:#fff;}
 
   /* ===================== MAIN SITE ===================== */
   #mainSite{display:none;position:relative;z-index:1;}
@@ -367,6 +410,7 @@
   /* CLOSING */
   #closing{
     background:linear-gradient(180deg, var(--pink-pale), var(--pink-bg));
+    position:relative;
   }
   #closing h2{font-size:1.9rem;color:var(--pink-hot);margin-bottom:12px;}
   #closing p{max-width:420px;color:#8a5a6d;font-size:1rem;line-height:1.7;}
@@ -375,6 +419,60 @@
     font-family:'Pacifico',cursive;
     font-size:1.3rem;
     color:var(--pink-deep);
+  }
+  #closingMain{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    transition:opacity 0.5s ease, transform 0.5s ease;
+  }
+  #closingMain.fade-out{
+    opacity:0;
+    transform:translateY(-16px);
+    pointer-events:none;
+    position:absolute;
+  }
+  #closeSiteBtn{
+    margin-top:32px;
+    padding:12px 34px;
+    border:none;
+    border-radius:50px;
+    background:var(--pink-hot);
+    color:#fff;
+    font-weight:700;
+    font-size:0.95rem;
+    cursor:pointer;
+    box-shadow:0 10px 22px rgba(255,92,138,0.3);
+    transition:transform 0.3s, box-shadow 0.3s, background 0.3s;
+  }
+  #closeSiteBtn:hover{
+    transform:translateY(-3px) scale(1.04);
+    box-shadow:0 14px 26px rgba(255,92,138,0.4);
+    background:#e14979;
+  }
+  #finalCard{
+    display:none;
+    flex-direction:column;
+    align-items:center;
+    opacity:0;
+    transform:scale(0.9);
+    transition:opacity 0.6s ease, transform 0.6s ease;
+  }
+  #finalCard.show-final{
+    display:flex;
+    opacity:1;
+    transform:scale(1);
+  }
+  #finalCard h2{font-size:2.2rem;color:var(--pink-hot);}
+  #finalCard p{color:#8a5a6d;font-size:1.05rem;margin-top:6px;}
+  .final-heart{
+    font-size:2.6rem;
+    margin-bottom:10px;
+    animation:heartBeat 1.4s ease-in-out infinite;
+  }
+  @keyframes heartBeat{
+    0%,100%{transform:scale(1);}
+    50%{transform:scale(1.18);}
   }
 
   @media(max-width:480px){
@@ -451,6 +549,7 @@
 <div id="successOverlay">
   <h2 id="successTitle">Yeay, Berhasil! 🎉</h2>
   <p id="successSub">terima kasih sudah membuka kejutan ini 💕</p>
+  <button id="closeSuccessBtn">Tutup & Lanjutkan →</button>
 </div>
 
 <!-- ============ MAIN SITE ============ -->
@@ -523,9 +622,17 @@
   </section>
 
   <section id="closing">
-    <h2>Sekian Kejutan Kecil Ini</h2>
-    <p>Semoga tahun barumu dipenuhi hal-hal baik, kesehatan, dan kebahagiaan yang nggak ada habisnya. Terima kasih sudah jadi orang yang spesial 🌸</p>
-    <div class="signature">dengan sayang, aku</div>
+    <div id="closingMain">
+      <h2>Sekian Kejutan Kecil Ini</h2>
+      <p>Semoga tahun barumu dipenuhi hal-hal baik, kesehatan, dan kebahagiaan yang nggak ada habisnya. Terima kasih sudah jadi orang yang spesial 🌸</p>
+      <div class="signature">dengan sayang, aku</div>
+      <button id="closeSiteBtn">Tutup 🤍</button>
+    </div>
+    <div id="finalCard">
+      <div class="final-heart">💕</div>
+      <h2>Terima Kasih</h2>
+      <p>sudah membaca sampai akhir 💗</p>
+    </div>
   </section>
 
 </div>
@@ -630,22 +737,67 @@ styleTag.textContent = `@keyframes shake{
 }`;
 document.head.appendChild(styleTag);
 
+const closeSuccessBtn = document.getElementById('closeSuccessBtn');
+let fireworkInterval = null;
+
 function unlockSite(){
   passModal.classList.remove('show');
   successOverlay.classList.add('show');
   launchConfetti();
-  setTimeout(()=>{
-    successOverlay.classList.remove('show');
-    lockScreen.classList.add('hidden');
-    mainSite.classList.add('show');
-    setTimeout(()=>{ lockScreen.style.display='none'; }, 1000);
-    initRevealObserver();
-  }, 2400);
+
+  /* kembang api meletus berkali-kali selama layar ini tampil */
+  launchFirework();
+  fireworkInterval = setInterval(launchFirework, 900);
+
+  /* tombol tutup muncul sebentar setelah efek mulai */
+  setTimeout(()=>{ closeSuccessBtn.classList.add('show-btn'); }, 900);
+
+  /* tetap ada auto-lanjut sebagai jaga-jaga, tapi lebih lama & bisa dipercepat lewat tombol */
+  window._autoProceedTimer = setTimeout(goToMainSite, 6000);
 }
+
+function goToMainSite(){
+  clearTimeout(window._autoProceedTimer);
+  clearInterval(fireworkInterval);
+  successOverlay.classList.remove('show');
+  closeSuccessBtn.classList.remove('show-btn');
+  lockScreen.classList.add('hidden');
+  mainSite.classList.add('show');
+  setTimeout(()=>{ lockScreen.style.display='none'; }, 1000);
+  initRevealObserver();
+}
+closeSuccessBtn.addEventListener('click', goToMainSite);
 
 /* =====================================================================
    CONFETTI on success
    ===================================================================== */
+function launchFirework(){
+  const colors = ['#ffffff','#ffd966','#ff8fab','#ffb6c9','#ff5c8a'];
+  const fw = document.createElement('div');
+  fw.className='firework';
+  const x = 15 + Math.random()*70; // % dari lebar layar
+  const y = 15 + Math.random()*45; // % dari tinggi layar
+  fw.style.left = x + '%';
+  fw.style.top = y + '%';
+  const color = colors[Math.floor(Math.random()*colors.length)];
+  const particleCount = 26;
+  for(let i=0;i<particleCount;i++){
+    const p = document.createElement('div');
+    p.className='fw-particle';
+    const angle = (Math.PI*2 / particleCount) * i;
+    const distance = 60 + Math.random()*40;
+    const tx = Math.cos(angle)*distance;
+    const ty = Math.sin(angle)*distance;
+    p.style.setProperty('--tx', tx+'px');
+    p.style.setProperty('--ty', ty+'px');
+    p.style.background = color;
+    p.style.animationDelay = (Math.random()*0.05)+'s';
+    fw.appendChild(p);
+  }
+  successOverlay.appendChild(fw);
+  setTimeout(()=>fw.remove(), 1300);
+}
+
 function launchConfetti(){
   const colors = ['#ffffff','#ffd966','#ff8fab','#ffb6c9'];
   for(let i=0;i<60;i++){
@@ -699,6 +851,20 @@ function openGift(){
 }
 openGiftBtn.addEventListener('click', openGift);
 giftBoxSvg.addEventListener('click', openGift);
+
+/* =====================================================================
+   TOMBOL TUTUP DI PENUTUP -> tampilkan kartu terima kasih
+   ===================================================================== */
+const closeSiteBtn = document.getElementById('closeSiteBtn');
+const closingMain = document.getElementById('closingMain');
+const finalCard = document.getElementById('finalCard');
+
+closeSiteBtn.addEventListener('click', ()=>{
+  closingMain.classList.add('fade-out');
+  setTimeout(()=>{
+    finalCard.classList.add('show-final');
+  }, 300);
+});
 </script>
 </body>
 </html>
